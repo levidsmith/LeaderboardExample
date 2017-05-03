@@ -21,7 +21,7 @@ INSTALLATION
 
 The Unity project is in the ScoreTest folder.
 
-The MySQL script to create the database is in "MySQL".  Run this once on your database.
+The MySQL script to create the database is in "MySQL".  Run this once on your database.  You may have to modify settings as needed for your database.
 
 The PHP files are in the "php" folder.  Host these files on your web server.
 
