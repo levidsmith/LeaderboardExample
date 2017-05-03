@@ -39,6 +39,7 @@ POSSIBLE IMPROVEMENTS
 - Unity: Fix probable issue with leaderboard display (ScoreDisplay.cs) when there are no matching rows in the score table.  The game should keep checking every second until score values are returned.
 - Unity: Remove the UI specific code in the addScore method from LeaderboardManager.cs
 - Unity: Modify LeaderboardManager.cs to use the iGameID for addScore instead of the input box value
+- Unity: Add constants class to hold all of the values that need to be changed.
 - PHP: Add ability to display latest scores
 - PHP: Add option to display all scores for a given name instead of just the highest score
 - PHP: Add HTTP display so that leaderboards for each game can be viewed by web browser
