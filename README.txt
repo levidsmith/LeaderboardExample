@@ -25,7 +25,7 @@ The MySQL script to create the database is in "MySQL".  Run this once on your da
 
 The PHP files are in the "php" folder.  Host these files on your web server.
 
-Generate an alphanumeric key, and place it in the php/AddScore.php file and ScoreTest/Assets/Scripts/LeaderboardManager.cs files.
+Generate an alphanumeric key, and place it at the appropriate locations in php/AddScore.php file and ScoreTest/Assets/Scripts/LeaderboardManager.cs files.
 
 Update URLs (TopScoresURL and AddScoreURL) in Assets/Scripts/LeaderboardManager.cs to match your web host.
 
