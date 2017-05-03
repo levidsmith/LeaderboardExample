@@ -20,3 +20,9 @@ The MySQL script to create the database is in "MySQL".  Run these once on your d
 The PHP files are in the "php" folder.  Host these files on your web server.
 
 Generate an alphanumeric key, and place it in the php/AddScore.php file and ScoreTest/Assets/Scripts/LeaderboardManager.cs files.
+
+Possible improvements
+- SQL: Add foreign key relation between game.id and score.game
+- Unity: Add a timeout if the game has checked the leaderboard X number of times and no data has been returned
+- Unity: Fix probable issue with leaderboard display (ScoreDisplay.cs) when there are no matching rows in the score table.  The game should keep checking every second until score values are returned.
+- PHP: Add ability to display latest scores
