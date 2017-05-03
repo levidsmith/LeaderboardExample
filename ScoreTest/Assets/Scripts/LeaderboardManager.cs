@@ -10,6 +10,14 @@ using UnityEngine.UI;
 
 public class LeaderboardManager : MonoBehaviour {
 
+	//BEGIN VARIABLES TO CHANGE
+    private string privateKey = "randomlygeneratedkey";
+    private string TopScoresURL = "http://example.com/scores/TopScores.php";
+    private string AddScoreURL = "http://example.com/scores/AddScore.php?";
+    private int iGameID = 0;
+	//END VARIABLES TO CHANGE
+
+
     public bool scoreAdded;
 
     void Start() {
@@ -19,11 +27,6 @@ public class LeaderboardManager : MonoBehaviour {
 
     }
 
-    private string privateKey = "randomlygeneratedkey";
-    private string TopScoresURL = "http://example.com/scores/TopScores.php";
-    private int iGameID = 0;
-
-    private string AddScoreURL = "http://example.com/scores/AddScore.php?";
 
     
     private string Md5Sum(string strToEncrypt) {
