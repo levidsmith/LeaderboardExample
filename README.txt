@@ -21,6 +21,8 @@ The PHP files are in the "php" folder.  Host these files on your web server.
 
 Generate an alphanumeric key, and place it in the php/AddScore.php file and ScoreTest/Assets/Scripts/LeaderboardManager.cs files.
 
+Update URLs (TopScoresURL and AddScoreURL) in Assets/Scripts/LeaderboardManager.cs to match your web host.
+
 Possible improvements
 - SQL: Add foreign key relation between game.id and score.game
 - Unity: Add a timeout if the game has checked the leaderboard X number of times and no data has been returned

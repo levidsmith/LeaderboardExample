@@ -11,7 +11,7 @@
         //This is the polite version of our name
         $politestring = sanitize($name);
 
-        $secretKey="randomkey";
+        $secretKey="randomlygeneratedkey";
 
         //We md5 hash our results.
         $expected_hash = md5($name . $score . $game . $secretKey);
