@@ -15,7 +15,7 @@ Modifications
 
 DESCRIPTION
 
-This is an example of how to make a leaderboard for a Unity game using PHP and MySQL.  This example requires Unity5 for the UI components.
+This is an example of how to make a leaderboard for a Unity game using PHP and MySQL.  This requires the user to manually enter their name in a text box.  If the same name is used more than once, then only the highest score for that name is displayed.  This example requires Unity5 for the UI components.
 
 INSTALLATION
 
@@ -36,3 +36,5 @@ POSSIBLE IMPROVEMENTS
 - Unity: Fix probable issue with leaderboard display (ScoreDisplay.cs) when there are no matching rows in the score table.  The game should keep checking every second until score values are returned.
 - Unity: Remove the UI specific code in the addScore method from LeaderboardManager.cs
 - PHP: Add ability to display latest scores
+- PHP: Add option to display all scores for a given name instead of just the highest score
+- Unity/PHP: Add capability to pull player name from an OAuth social media account (Twitter, Google, Facebook, etc)
