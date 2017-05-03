@@ -8,7 +8,7 @@ I started with code from "Self Hosted PHP/SQL Leaderboard" by Michael James Will
 https://github.com/tutsplus/self-hosted-php-sql-leaderboard
 Modifications
 - Fixed SQL table name error
-- Put database connection information into its own PHP file
+- Put database connection information into its own PHP file so that the connection information only has to be entered once and not for every file
 - Added additional column and table to track leaderboards for multiple games
 - Unity5 example written from scratch.
 - Removed rank tracking
