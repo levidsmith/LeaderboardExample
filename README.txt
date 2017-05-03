@@ -31,12 +31,14 @@ Update URLs (TopScoresURL and AddScoreURL) in Assets/Scripts/LeaderboardManager.
 
 For each game, set the iGameID variable in LeaderboardManager.cs to a unique integer.  I suggest starting with 0 and incrementing from there.  Currently, the game SQL table is not used, but it may be used in the future to track which ID cooresponds to which game.  Therefore, I would suggest adding the game ID and name relation in that table.
 
+
 POSSIBLE IMPROVEMENTS
 
 - SQL: Add foreign key relation between game.id and score.game
 - Unity: Add a timeout if the game has checked the leaderboard X number of times and no data has been returned
 - Unity: Fix probable issue with leaderboard display (ScoreDisplay.cs) when there are no matching rows in the score table.  The game should keep checking every second until score values are returned.
 - Unity: Remove the UI specific code in the addScore method from LeaderboardManager.cs
+- Unity: Modify LeaderboardManager.cs to use the iGameID for addScore instead of the input box value
 - PHP: Add ability to display latest scores
 - PHP: Add option to display all scores for a given name instead of just the highest score
 - PHP: Add HTTP display so that leaderboards for each game can be viewed by web browser
