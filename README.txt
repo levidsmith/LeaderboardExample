@@ -29,6 +29,8 @@ Generate an alphanumeric key, and place it at the appropriate locations in php/A
 
 Update URLs (TopScoresURL and AddScoreURL) in Assets/Scripts/LeaderboardManager.cs to match your web host.
 
+For each game, set the iGameID variable in LeaderboardManager.cs to a unique integer.  I suggest starting with 0 and incrementing from there.  Currently, the game SQL table is not used, but it may be used in the future to track which ID cooresponds to which game.  Therefore, I would suggest adding the game ID and name relation in that table.
+
 POSSIBLE IMPROVEMENTS
 
 - SQL: Add foreign key relation between game.id and score.game
@@ -37,4 +39,5 @@ POSSIBLE IMPROVEMENTS
 - Unity: Remove the UI specific code in the addScore method from LeaderboardManager.cs
 - PHP: Add ability to display latest scores
 - PHP: Add option to display all scores for a given name instead of just the highest score
+- PHP: Add HTTP display so that leaderboards for each game can be viewed by web browser
 - Unity/PHP: Add capability to pull player name from an OAuth social media account (Twitter, Google, Facebook, etc)
