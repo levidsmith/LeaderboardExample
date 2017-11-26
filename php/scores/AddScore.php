@@ -1,23 +1,24 @@
-<?php
+<?php 
 
         include 'mysql_connect.php';
         //These are our variables.
         //We use real escape string to stop people from injecting. We handle this in Unity too, but it's important we do it here as well in case people extract our url.
-        $name = mysql_real_escape_string($_GET['name'], $db);
-        $score = mysql_real_escape_string($_GET['score'], $db);
-        $game = mysql_real_escape_string($_GET['game'], $db);
-        $hash = $_GET['hash'];
-
+        $name = mysql_real_escape_string($_GET['name'], $db); 
+        $score = mysql_real_escape_string($_GET['score'], $db); 
+        $game = mysql_real_escape_string($_GET['game'], $db); 
+        $hash = $_GET['hash']; 
+        
         //This is the polite version of our name
         $politestring = sanitize($name);
-
-        $secretKey="randomlygeneratedkey";
-
+        
+        //This is your key. You have to fill this in! Go and generate a strong one.
+        $secretKey="***KEY***";
+        
         //We md5 hash our results.
-        $expected_hash = md5($name . $score . $game . $secretKey);
-
+        $expected_hash = md5($name . $score . $game . $secretKey); 
+        
         //If what we expect is what we have:
-        if($expected_hash == $hash) {
+        if($expected_hash == $hash) { 
             // Here's our query to insert/update scores!
             $query = "INSERT INTO score
 SET name = '$politestring'
@@ -25,10 +26,10 @@ SET name = '$politestring'
    , game = '$game'
    , ts = CURRENT_TIMESTAMP
 ON DUPLICATE KEY UPDATE
-   ts = if('$score'>score,CURRENT_TIMESTAMP,ts), score = if ('$score'>score, '$score', score);";
+   ts = if('$score'>score,CURRENT_TIMESTAMP,ts), score = if ('$score'>score, '$score', score);"; 
             //And finally we send our query.
-            $result = mysql_query($query) or die('Query failed: ' . mysql_error());
-        }
+            $result = mysql_query($query) or die('Query failed: ' . mysql_error()); 
+        } 
 
 /////////////////////////////////////////////////
 // string sanitize functionality to avoid
@@ -36,9 +37,20 @@ ON DUPLICATE KEY UPDATE
 /////////////////////////////////////////////////
 function no_naughty($string)
 {
-
-//LDS - Put bad word replacement here.  I took these out to keep search engines from flagging this code
-    $string = preg_replace('/badword/i', '*******', $string);
+    $string = preg_replace('/shit/i', '****', $string);
+    $string = preg_replace('/fuck/i', '****', $string);
+    $string = preg_replace('/asshole/i', '*******', $string);
+    $string = preg_replace('/bitches/i', '*******', $string);
+    $string = preg_replace('/bitch/i', '*****', $string);
+    $string = preg_replace('/bastard/i', '*******', $string);
+    $string = preg_replace('/nigger/i', '******', $string);
+    $string = preg_replace('/cunt/i', '****', $string);
+    $string = preg_replace('/cock/i', '****', $string);
+    $string = preg_replace('/faggot/i', '******', $string);
+    $string = preg_replace('/suck/i', '****', $string);
+    $string = preg_replace('/dick/i', '****', $string);
+    $string = preg_replace('/crap/i', '****', $string);
+    $string = preg_replace('/blows/i', '*****', $string);
 
     // ie does not understand "&apos;" &#39; &rsquo;
     $string = preg_replace("/'/i", '&rsquo;', $string);
@@ -51,13 +63,17 @@ function no_naughty($string)
     $string = preg_replace('/&034;/i', '&quot;', $string);
     $string = preg_replace('/&#034;/i', '&quot;', $string);
 
+    // these 3 letter words occur commonly in non-rude words...
+    //$string = preg_replace('/fag', 'pig', $string);
+    //$string = preg_replace('/ass', 'donkey', $string);
+    //$string = preg_replace('/gay', 'happy', $string);
     return $string;
 }
 
 function my_utf8($string)
 {
     return strtr($string,
-      "/<>???????????? ??????????????????????????????????????????????",
+      "/<>������������ ��Ց������������������������������ԕ���ٞ��������",
       "![]YuAAAAAAACEEEEIIIIDNOOOOOOUUUUYsaaaaaaaceeeeiiiionoooooouuuuyy");
 }
 
