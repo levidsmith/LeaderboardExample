@@ -83,9 +83,6 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\LeaderboardManager\HighScoreManager.cs" />
     <Compile Include="Assets\Scripts\LeaderboardManager\LeaderboardMenu.cs" />
-    <Compile Include="Assets\Scripts\LeaderboardManager\old\LeaderboardManager.cs" />
-    <Compile Include="Assets\Scripts\LeaderboardManager\old\ScoreDisplay.cs" />
-    <Compile Include="Assets\Scripts\LeaderboardManager\old\SubmitScoreTestMenu.cs" />
     <Compile Include="Assets\Scripts\LeaderboardManager\ScoreEntry.cs" />
   </ItemGroup>
   <ItemGroup>
