@@ -3,16 +3,16 @@
         include 'mysql_connect.php';
         //These are our variables.
         //We use real escape string to stop people from injecting. We handle this in Unity too, but it's important we do it here as well in case people extract our url.
-        $name = mysql_real_escape_string($_GET['name'], $db); 
-        $score = mysql_real_escape_string($_GET['score'], $db); 
-        $game = mysql_real_escape_string($_GET['game'], $db); 
+        $name = mysqli_real_escape_string($conn, $_GET['name']); 
+        $score = mysqli_real_escape_string($conn, $_GET['score']); 
+        $game = mysqli_real_escape_string($conn, $_GET['game']); 
         $hash = $_GET['hash']; 
         
         //This is the polite version of our name
         $politestring = sanitize($name);
         
         //This is your key. You have to fill this in! Go and generate a strong one.
-        $secretKey="***KEY***";
+        $secretKey="****************";
         
         //We md5 hash our results.
         $expected_hash = md5($name . $score . $game . $secretKey); 
@@ -28,7 +28,7 @@ SET name = '$politestring'
 ON DUPLICATE KEY UPDATE
    ts = if('$score'>score,CURRENT_TIMESTAMP,ts), score = if ('$score'>score, '$score', score);"; 
             //And finally we send our query.
-            $result = mysql_query($query) or die('Query failed: ' . mysql_error()); 
+            $result = mysqli_query($conn, $query) or die('Query failed: ' . mysqli_error()); 
         } 
 
 /////////////////////////////////////////////////

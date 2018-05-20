@@ -1,5 +1,5 @@
 <?php
         //You have to fill in this information to connect to your database!
-        $db = mysql_connect('***HOSTNAME***', '***DBNAME***', '***PASSWORD***') or die('Failed to connect: ' . mysql_error());
-        mysql_select_db('***DBNAME***') or die('Failed to access database');
+        $conn = mysqli_connect('*********************************example.com', '****************', '**********!') or die('Failed to connect: ' . mysqli_error());
+        mysqli_select_db($conn, '****************') or die('Failed to access database');
 ?>

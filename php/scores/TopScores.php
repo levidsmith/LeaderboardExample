@@ -1,8 +1,8 @@
 <?php
     include 'mysql_connect.php';
 
-        $game = mysql_real_escape_string($_GET['game'], $db);
-        $order_by = mysql_real_escape_string($_GET['order_by'], $db);
+        $game = mysqli_real_escape_string($conn, $_GET['game']);
+        $order_by = mysqli_real_escape_string($conn, $_GET['order_by']);
  
      //This query grabs the top 10 scores, sorting by score and timestamp.
     $query = "SELECT * FROM score WHERE game=$game ";
@@ -16,15 +16,15 @@
     }
     $query .= "ts ASC LIMIT 10";
    
-    $result = mysql_query($query) or die('Query failed: ' . mysql_error());
+    $result = mysqli_query($conn, $query) or die('Query failed: ' . mysqli_error());
  
     //We find our number of rows
-    $result_length = mysql_num_rows($result); 
+    $result_length = mysqli_num_rows($result); 
     
     //And now iterate through our results
     for($i = 0; $i < $result_length; $i++)
     {
-         $row = mysql_fetch_array($result);
+         $row = mysqli_fetch_array($result);
          echo $row['name'] . "\t" . $row['score'] . "\n"; // And output them
     }
 ?>

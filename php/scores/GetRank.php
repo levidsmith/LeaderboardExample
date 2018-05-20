@@ -1,7 +1,7 @@
 <?php
         include 'mysql_connect.php';
 
-    $name = mysql_real_escape_string($_GET['name']); 
+    $name = mysqli_real_escape_string($conn, $_GET['name']); 
     
     //This is the polite version of our name
     $politestring = sanitize($name);
@@ -15,14 +15,14 @@
           ) AS rank
       FROM    Score uo
       WHERE   name = '$politestring';";
-      $result = mysql_query($query) or die('Query failed: ' . mysql_error());
+      $result = mysqli_query($conn, $query) or die('Query failed: ' . mysqli_error());
       
       //This is more elaborate than we need, considering we're only grabbing one rank, but you can modify it if needs be.
-      $num_results = mysql_num_rows($result);  
+      $num_results = mysqli_num_rows($result);  
       
       for($i = 0; $i < $num_results; $i++)
       {
-           $row = mysql_fetch_array($result);
+           $row = mysqli_fetch_array($result);
            echo $row['rank'] . "\n";
       }
 
