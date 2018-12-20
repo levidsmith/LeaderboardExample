@@ -14,6 +14,7 @@ public class HighScoreManager : MonoBehaviour {
     private string strOrder = "ASC";
     //END CONFIGURATION VALUES
 
+
     public bool scoreAdded;
     public bool isFinishedLoading;
 
