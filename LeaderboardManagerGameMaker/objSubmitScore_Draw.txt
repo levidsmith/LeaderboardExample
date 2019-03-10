@@ -1,0 +1,13 @@
+draw_set_halign(fa_center)
+draw_set_font(fontRegular)
+draw_set_color(c_black)
+if (not hasSubmitted) {
+	draw_text(x, y - 100, "Enter Name:    ")
+	draw_text(x, y - 60, keyboard_string + "|")
+} else {
+		draw_text(x, y - 60, strName)
+}
+
+if (not hasSubmitted) {
+	draw_sprite(sprite_index, image_index, x, y)
+}

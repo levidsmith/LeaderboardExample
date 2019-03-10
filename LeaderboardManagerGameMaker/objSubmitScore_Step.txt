@@ -1,0 +1,12 @@
+strName = string_letters(keyboard_string)
+if (string_length(strName) >= 3) {
+	isEnabled = true
+} else {
+	isEnabled = false
+}
+
+if (isEnabled) {
+	image_index = 0	
+} else {
+	image_index = 1	
+}

@@ -1,0 +1,4 @@
+strName = ""
+keyboard_string = ""
+hasSubmitted = false
+isEnabled = false

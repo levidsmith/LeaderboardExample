@@ -1,0 +1,19 @@
+privateKey = "****************"
+addScoreURL = "https://**********.com/scores/AddScore.php?"
+iGameID = ****
+iScore = global.final_score
+
+
+if (not hasSubmitted and isEnabled) {
+	show_debug_message("Name " + strName)
+	
+	hash = md5_string_utf8(strName + string(iScore) + string(iGameID) + privateKey)
+	show_debug_message("hash: " + hash)
+	url_open(addScoreURL + "name=" + strName + "&score=" + string(iScore) + "&game=" + string(iGameID) + "&hash=" + hash)
+
+	hasSubmitted = true
+	
+	objReturnToTitleButton.isEnabled = true
+	
+	
+}
