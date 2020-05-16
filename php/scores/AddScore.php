@@ -1,8 +1,12 @@
 <?php 
 
+	$debug = false;
+
         include 'mysql_connect.php';
         //These are our variables.
         //We use real escape string to stop people from injecting. We handle this in Unity too, but it's important we do it here as well in case people extract our url.
+        $redirect_url = "https://levidsmith.com/scores/DisplayScores.html";
+
         $name = mysqli_real_escape_string($conn, $_GET['name']); 
         $score = mysqli_real_escape_string($conn, $_GET['score']); 
         $game = mysqli_real_escape_string($conn, $_GET['game']); 
@@ -12,7 +16,13 @@
         $politestring = sanitize($name);
         
         //This is your key. You have to fill this in! Go and generate a strong one.
-        $secretKey="****************";
+#        $secretKey="****************";
+        //Query the game's leaderboard key from the database
+        $query_leaderboard_key = "SELECT leaderboard_key FROM game WHERE id = " . $game;
+        $result = mysqli_query($conn, $query_leaderboard_key) or die('Query failed: ' . mysqli_error());
+        $row = mysqli_fetch_row($result);
+        $secretKey = trim($row[0]);
+#        echo "***" . $secretKey . "***<br>";
         
         //We md5 hash our results.
         $expected_hash = md5($name . $score . $game . $secretKey); 
@@ -29,7 +39,18 @@ ON DUPLICATE KEY UPDATE
    ts = if('$score'>score,CURRENT_TIMESTAMP,ts), score = if ('$score'>score, '$score', score);"; 
             //And finally we send our query.
             $result = mysqli_query($conn, $query) or die('Query failed: ' . mysqli_error()); 
-        } 
+            echo "<html><head>";
+            echo '<meta http-equiv="refresh" content="0; url=' . $redirect_url . '" />';
+            echo "</head><body>";
+            echo "Score Added: " . $name . ", " . $score . ", " . $game;
+            echo "</body></html>";
+        }  else {
+            echo "Invalid hash value<br/>";
+            if ($debug) {
+              echo "Expected: ". $expected_hash . " got: " . $hash;
+            }
+
+        }
 
 /////////////////////////////////////////////////
 // string sanitize functionality to avoid

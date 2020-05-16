@@ -1,0 +1,63 @@
+    .game {
+      width: 600px;
+      float: left;
+      background-color: #daffdb;
+      border: 2px solid black;
+      padding: 4px;
+      margin: 4px;
+    }
+
+    .game .game_metric {
+      font-style: italic;
+    }
+
+    .game .game_name {
+      width: 100%;
+      font-size: 14pt;
+      color: #000000;
+      float: none;
+    }
+
+    .game .score_first_place {
+      color: #FFFFFF;
+      background-color: #0000FF;
+      font-weight: bold;
+      padding: 4px;
+      overflow: auto;
+    }
+
+    .game .score_second_place {
+      color: #FFFFFF;
+      background-color: #FF0000;
+      font-weight: bold;
+      padding: 4px;
+      overflow: auto;
+    }
+
+    .game .score_third_place {
+      color: #A0A000;
+      background-color: #FFFFFF;
+      font-weight: bold;
+      padding: 4px;
+      overflow: auto;
+    }
+
+    .game .score_other {
+      color: #000000;
+      background-color: #E0E0E0;
+      padding: 4px;
+      overflow: auto;
+    }
+
+    .score_name {
+      width: 200px;
+      float: left;
+    }
+
+    .score_score {
+      width: 340px;
+      float: left;
+      text-align: right;
+    }
+
+

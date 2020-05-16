@@ -1,4 +1,4 @@
-ScoreTest - 2017 Levi D. Smith support@levidsmith.com @GaTechGrad
+ScoreTest - 2017-2020 Levi D. Smith support@levidsmith.com @GaTechGrad
 
 DISCLAIMERS
 
@@ -7,6 +7,8 @@ This is provided AS IS with no expectation of WARRANTY.
 I started with code from "Self Hosted PHP/SQL Leaderboard" by Michael James Williams
 https://github.com/tutsplus/self-hosted-php-sql-leaderboard
 Modifications
+- May 2020 - Keys are now read from the database and unique for each game.  So if a game key is compromised, then only that game needs to be re-keyed
+
 - Fixed SQL table name error
 - Put database connection information into its own PHP file so that the connection information only has to be entered once and not for every file
 - Added additional column and table to track leaderboards for multiple games
@@ -24,6 +26,8 @@ The Unity project is in the ScoreTest folder.
 The MySQL script to create the database is in "MySQL".  Run this once on your database.  You may have to modify settings as needed for your database.
 
 The PHP files are in the "php" folder.  Host these files on your web server.
+	
+	You will need to create your own scores/mysql_connect.php and scores/update_key.php
 
 Generate an alphanumeric key, and place it at the appropriate locations in php/AddScore.php file and ScoreTest/Assets/Scripts/LeaderboardManager.cs files.
 

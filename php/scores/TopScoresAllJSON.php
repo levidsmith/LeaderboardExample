@@ -1,11 +1,15 @@
 <?php
     include 'mysql_connect.php';
 
+    $game = mysqli_real_escape_string($conn, $_GET['game']);
     $score_limit_value = 20;
 
  
      //This query grabs the top 10 scores, sorting by score and timestamp.
     $query_game = "SELECT id, name, order_method, score_format, metric, download_url FROM game";
+    if ($game != "") {
+      $query_game .= " WHERE id = " . $game;
+    }
     $query_game .= " ORDER BY name ASC ";
  #   $query .= "ts ASC LIMIT 10";
    
