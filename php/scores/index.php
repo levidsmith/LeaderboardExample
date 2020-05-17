@@ -25,4 +25,4 @@
 
 ?>
 
-<a href="https://**********/leaderboard-management/">Leaderboard Management</a>
+<a href="https://example.com/leaderboard-management/">Leaderboard Management</a>

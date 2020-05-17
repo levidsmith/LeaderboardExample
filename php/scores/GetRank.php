@@ -30,23 +30,12 @@
 // string sanitize functionality to avoid
 // sql or html injection abuse and bad words
 /////////////////////////////////////////////////
-function no_naughty($string)
-{
-    $string = preg_replace('/shit/i', 'shoot', $string);
-    $string = preg_replace('/fuck/i', 'fool', $string);
-    $string = preg_replace('/asshole/i', 'animal', $string);
-    $string = preg_replace('/bitches/i', 'dogs', $string);
-    $string = preg_replace('/bitch/i', 'dog', $string);
-    $string = preg_replace('/bastard/i', 'plastered', $string);
-    $string = preg_replace('/nigger/i', 'newbie', $string);
-    $string = preg_replace('/cunt/i', 'corn', $string);
-    $string = preg_replace('/cock/i', 'rooster', $string);
-    $string = preg_replace('/faggot/i', 'piglet', $string);
+function no_naughty($string) {
+    $badwords = file("badwords.txt", FILE_IGNORE_NEW_LINES);
+    foreach ($badwords as $badword) {
+      $string = preg_replace('/' . $badword . '/i', str_pad("", strlen($badword), '*', STR_PAD_LEFT), $string);
+    }
 
-    $string = preg_replace('/suck/i', 'rock', $string);
-    $string = preg_replace('/dick/i', 'deck', $string);
-    $string = preg_replace('/crap/i', 'rap', $string);
-    $string = preg_replace('/blows/i', 'shows', $string);
 
     // ie does not understand "&apos;" &#39; &rsquo;
     $string = preg_replace("/'/i", '&rsquo;', $string);
@@ -59,10 +48,6 @@ function no_naughty($string)
     $string = preg_replace('/&034;/i', '&quot;', $string);
     $string = preg_replace('/&#034;/i', '&quot;', $string);
 
-    // these 3 letter words occur commonly in non-rude words...
-    //$string = preg_replace('/fag', 'pig', $string);
-    //$string = preg_replace('/ass', 'donkey', $string);
-    //$string = preg_replace('/gay', 'happy', $string);
     return $string;
 }
 

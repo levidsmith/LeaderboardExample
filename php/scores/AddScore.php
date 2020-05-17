@@ -56,22 +56,11 @@ ON DUPLICATE KEY UPDATE
 // string sanitize functionality to avoid
 // sql or html injection abuse and bad words
 /////////////////////////////////////////////////
-function no_naughty($string)
-{
-    $string = preg_replace('/shit/i', '****', $string);
-    $string = preg_replace('/fuck/i', '****', $string);
-    $string = preg_replace('/asshole/i', '*******', $string);
-    $string = preg_replace('/bitches/i', '*******', $string);
-    $string = preg_replace('/bitch/i', '*****', $string);
-    $string = preg_replace('/bastard/i', '*******', $string);
-    $string = preg_replace('/nigger/i', '******', $string);
-    $string = preg_replace('/cunt/i', '****', $string);
-    $string = preg_replace('/cock/i', '****', $string);
-    $string = preg_replace('/faggot/i', '******', $string);
-    $string = preg_replace('/suck/i', '****', $string);
-    $string = preg_replace('/dick/i', '****', $string);
-    $string = preg_replace('/crap/i', '****', $string);
-    $string = preg_replace('/blows/i', '*****', $string);
+function no_naughty($string) {
+    $badwords = file("badwords.txt", FILE_IGNORE_NEW_LINES);
+    foreach ($badwords as $badword) {
+      $string = preg_replace('/' . $badword . '/i', str_pad("", strlen($badword), '*', STR_PAD_LEFT), $string);
+    }
 
     // ie does not understand "&apos;" &#39; &rsquo;
     $string = preg_replace("/'/i", '&rsquo;', $string);
@@ -84,10 +73,6 @@ function no_naughty($string)
     $string = preg_replace('/&034;/i', '&quot;', $string);
     $string = preg_replace('/&#034;/i', '&quot;', $string);
 
-    // these 3 letter words occur commonly in non-rude words...
-    //$string = preg_replace('/fag', 'pig', $string);
-    //$string = preg_replace('/ass', 'donkey', $string);
-    //$string = preg_replace('/gay', 'happy', $string);
     return $string;
 }
 

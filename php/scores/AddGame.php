@@ -10,7 +10,9 @@
         $hash = $_GET['hash']; 
         
         //This is your key. You have to fill this in! Go and generate a strong one.
-        
+        //Included from update_key.php
+
+		
         //We md5 hash our results.
         $str_date = date("Ymd");
         $expected_hash = md5(urlencode($name) . $id  . $str_date . $secretKey); 
