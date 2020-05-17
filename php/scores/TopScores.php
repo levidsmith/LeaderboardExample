@@ -2,7 +2,11 @@
     include 'mysql_connect.php';
 
         $game = mysqli_real_escape_string($conn, $_GET['game']);
-        $order_by = mysqli_real_escape_string($conn, $_GET['order_by']);
+        if (isset($_GET['order_by'])) {
+            $order_by = mysqli_real_escape_string($conn, $_GET['order_by']);
+        } else {
+            $order_by = 'DESC';
+        }
  
      //This query grabs the top 10 scores, sorting by score and timestamp.
     $query = "SELECT * FROM score WHERE game=$game ";

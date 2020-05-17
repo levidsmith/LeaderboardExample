@@ -1,7 +1,11 @@
 <?php
     include 'mysql_connect.php';
 
-    $game = mysqli_real_escape_string($conn, $_GET['game']);
+    if (isset($_GET['game'])) {
+      $game = mysqli_real_escape_string($conn, $_GET['game']);
+    } else {
+      $game = "";
+    }
     $score_limit_value = 20;
 
  
