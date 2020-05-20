@@ -6,17 +6,37 @@
     } else {
       $game = "";
     }
+
+    if (isset($_GET['unique'])) {
+      $unique = mysqli_real_escape_string($conn, $_GET['unique']);
+      if ($unique != "0") {
+        $unique = "1";
+      }
+    } else {
+      $unique = "1";
+    }
+
+
+    $latest = "0";
+    if (isset($_GET['latest'])) {
+      $latest = mysqli_real_escape_string($conn, $_GET['latest']);
+      if ($latest != "0") {
+        $latest = "1";
+        #If we want to look at latest scores, we want to see duplicates 
+        $unique = "0";  
+      }
+    }
+
     $score_limit_value = 20;
 
  
-     //This query grabs the top 10 scores, sorting by score and timestamp.
+     //This query grabs the top $score_limit_value scores, sorting by score and timestamp.
     $query_game = "SELECT id, name, order_method, score_format, metric, download_url FROM game";
     if ($game != "") {
       $query_game .= " WHERE id = " . $game;
     }
     $query_game .= " ORDER BY name ASC ";
- #   $query .= "ts ASC LIMIT 10";
-   
+  
     $result = mysqli_query($conn, $query_game) or die('Query failed: ' . mysqli_error());
  
     //We find our number of rows
@@ -34,15 +54,35 @@
          echo "\t\t\t" . '"metric": "' . $row['metric'] .  '"'; 
 
          ### BEGIN SCORE QUERY
+         if ($unique == "1") {
+             if ($row['order_method'] == 0) {
+               $query_scores = "SELECT name, MAX(score) as score, ts FROM score";
+               $query_scores .= " WHERE game =  " . $row['id'];
+               $query_scores .= " GROUP BY name";
+               $query_order_by = " ORDER BY score DESC";
 
-         $query_scores = "SELECT name, score FROM score";
-         $query_scores .= " WHERE game =  " . $row['id'];
-         if ($row['order_method'] == 0) {
-           $query_scores .= " ORDER BY score DESC";
-
-         } elseif ($row['order_method'] == 1) {
-           $query_scores .= " ORDER BY score ASC";
+             } elseif ($row['order_method'] == 1) {
+               $query_scores = "SELECT name, MIN(score) as score, ts FROM score";
+               $query_scores .= " WHERE game =  " . $row['id'];
+               $query_scores .= " GROUP BY name";
+               $query_order_by = " ORDER BY score ASC";
+             }
+ 
+         } else {
+             $query_scores = "SELECT name, score, ts FROM score";
+             $query_scores .= " WHERE game =  " . $row['id'];
+             if ($row['order_method'] == 0) {
+               $query_order_by = " ORDER BY score DESC";
+             } elseif ($row['order_method'] == 1) {
+               $query_order_by = " ORDER BY score ASC";
+             }
          }
+
+         if ($latest == 1) {
+           $query_order_by = " ORDER BY ts DESC"; 
+         }
+
+         $query_scores .= $query_order_by;
 
          $query_scores .= " LIMIT " . $score_limit_value;
 

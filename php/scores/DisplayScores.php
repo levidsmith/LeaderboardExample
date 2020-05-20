@@ -1,8 +1,39 @@
 <!DOCTYPE html>
 <!-- 2017 Levi D. Smith -->
+<?php
+  $param_unique = "1";
+  $param_latest = "0";
+  if (isset($_GET["unique"])) {
+    $param_unique = $_GET["unique"];
+#      $params .= '?unique=' . $_GET["unique"];
+  }
+  if (isset($_GET["latest"])) {
+    $param_latest = $_GET["latest"];
+#      $params .= '?latest=' . $_GET["latest"];
+  }
+?>
 <html>
 <head>
 
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-62497279-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-62497279-1');
+</script>
+<!-- End Google Analytics -->
+
+        <!-- Start Google Font -->
+        <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
+        <!-- End Google Font -->
+
+<?php
+  $site_name = "Example";
+  $site_url = "https://example.com";
+?>
 
  
   <meta http-equiv="pragma" content="no-cache">
@@ -12,7 +43,7 @@
     body {
       font-family: "Share Tech", Sans-Serif;
       font-size: 10pt;
-      background-image: url("https://example.com/website_bkg3.jpg");
+      background-image: url("https://example.com/blog/wp-content/uploads/2015/03/website_bkg3.jpg");
       background-repeat: no-repeat;
       background-color: #15c117;
       background-size: cover;
@@ -120,10 +151,17 @@
 <body>
 
 <h2>Leaderboards</h2>
+<?php
+    echo '<a href="' . $site_url . '/scores/DisplayScores?unique=1">Top Scores by Name</a> - ';
+    echo '<a href="' . $site_url . '/scores/DisplayScores?unique=0">All Top Scores</a> - ';
+    echo '<a href="' . $site_url . '/scores/DisplayScores?latest=1">Latest Scores</a>';
+?>
 
 <p id="game_display"></p>
 <div class="back">
-<a href="https://example.com">Back</a>
+<?php
+    echo '<a href="' . $site_url . '">Back to ' . $site_name . '</a>';
+?>
 </div>
 
 
@@ -147,6 +185,13 @@ xmlhttp.onreadystatechange = function() {
       if (myObj.games[i].scores) {
 
         for ( var j = 0; j < myObj.games[i].scores.length; j++) {
+<?php
+  if ($param_latest == "1") {
+?>
+            strGame += '<div class="score_other">';
+<?php
+  } else {
+?>
           if (j == 0) {
             strGame += '<div class="score_first_place">';
           } else if (j == 1) {
@@ -156,6 +201,9 @@ xmlhttp.onreadystatechange = function() {
           } else {
             strGame += '<div class="score_other">';
           }
+<?php
+  }
+?>
           strGame += '<div class="score_name">';
           strGame += myObj.games[i].scores[j].name + "\n";
           strGame += '</div>';
@@ -172,22 +220,30 @@ xmlhttp.onreadystatechange = function() {
       strGame += '</div>';
     } 
 
-	document.getElementById("game_display").innerHTML = "bar";
 	document.getElementById("game_display").innerHTML = strGame;
   }
 };
 
 	document.getElementById("game_display").innerHTML = "Loading";
 
-
-xmlhttp.open("GET", "https://example.com/scores/leaderboard.json", true);
+<?php
+  $params = "?";
+  if ($param_unique == "1") {
+      $params .= 'unique=1';
+  } else {
+      $params .= 'unique=0';
+  }
+  $params .= "&";
+  if ($param_latest == "1") {
+      $params .= 'latest=1';
+  } else {
+      $params .= 'latest=0';
+  }
+  echo 'xmlhttp.open("GET", "' . $site_url . '/scores/leaderboard.json' . $params . '", true);';
+?>
 xmlhttp.send();
 
-
 </script>
-
-
-
 
 </body>
 </html>

@@ -7,9 +7,18 @@
         } else {
             $order_by = 'DESC';
         }
+        
+        $unique = "1";
  
      //This query grabs the top 10 scores, sorting by score and timestamp.
-    $query = "SELECT * FROM score WHERE game=$game ";
+    if ($unique != "0") {
+        $query = "SELECT name, MAX(score) as score FROM score";
+        $query .= " WHERE game =  " . $game;
+        $query .= " GROUP BY name";
+
+    } else {
+        $query = "SELECT * FROM score WHERE game=$game ";
+    }
     if ($order_by == 'ASC') {
       $query .= " ORDER BY score ASC, ";
     } elseif ($order_by == 'DESC') {

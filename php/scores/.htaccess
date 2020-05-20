@@ -2,7 +2,17 @@
 RewriteEngine On
 RewriteBase /scores/
 
+#Make the PHP file appear to be a JSON file
 RewriteRule ^leaderboard.json TopScoresAllJSON.php [L]
+
+#Forward request with .html or .php extension to URL without extension
+RewriteRule ^DisplayScores.html$ DisplayScores [R=301]
+#RewriteRule ^DisplayScores.php$ DisplayScores [R=301]
+
+#Make DisplayScore accessible without the .php extension 
+RewriteRule ^DisplayScores$ DisplayScores.php [L]
+
+
 
 </IfModule>
 
