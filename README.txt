@@ -7,6 +7,7 @@ This is provided AS IS with no expectation of WARRANTY.
 I started with code from "Self Hosted PHP/SQL Leaderboard" by Michael James Williams
 https://github.com/tutsplus/self-hosted-php-sql-leaderboard
 Modifications
+- May 2020 - Now can display top scores by name and latest scores.  TopScores.php now defaults to top scores grouped by name
 - May 2020 - Keys are now read from the database and unique for each game.  So if a game key is compromised, then only that game needs to be re-keyed
 
 - Fixed SQL table name error
@@ -44,7 +45,5 @@ POSSIBLE IMPROVEMENTS
 - Unity: Remove the UI specific code in the addScore method from LeaderboardManager.cs
 - Unity: Modify LeaderboardManager.cs to use the iGameID for addScore instead of the input box value
 - Unity: Add constants class to hold all of the values that need to be changed.
-- PHP: Add ability to display latest scores
 - PHP: Add option to display all scores for a given name instead of just the highest score
-- PHP: Add HTTP display so that leaderboards for each game can be viewed by web browser
 - Unity/PHP: Add capability to pull player name from an OAuth social media account (Twitter, Google, Facebook, etc)
