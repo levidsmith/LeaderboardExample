@@ -1,4 +1,4 @@
-ScoreTest - 2017-2020 Levi D. Smith support@levidsmith.com @GaTechGrad
+ScoreTest - 2017-2020 Levi D. Smith support@levidsmith.com
 
 DISCLAIMERS
 
